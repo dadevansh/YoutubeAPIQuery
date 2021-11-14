@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from query import views
+from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('search/', views.search)
+    path('search/', csrf_exempt(views.search)),
+    path('search/<task_id>', views.search_with_task),
+    path('search/<task_id>/<int:page>', views.search_with_task)
 ]
